@@ -4,33 +4,35 @@ import MainLayout from './layout/foodlayout';
 import SearchForm from './components/SearchForm';
 import {useState, useEffect} from 'react';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 function App() {
 
   const [search, setSearch] = useState('');
   const [meals, setMeals] = useState([]);
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const [heading, setHeading] = useState('Explore Meals');
 
   // Fetch six random meals on mount
-  
-    const fetchRandomMeals = async () => {
-      try {
-        setError('');
-        const requests = Array.from({ length: 6 }, () =>
-          fetch('https://www.themealdb.com/api/json/v1/1/random.php').then(res => res.json())
-        );
-        const results = await Promise.all(requests);
-        // Flatten and filter out any nulls
-        const randomMeals = results
-          .map(r => r.meals && r.meals[0])
-          .filter(Boolean);
-        setMeals(randomMeals);
-      } catch (error) {
-        setError('Error fetching random meals');
-        console.error('Error fetching random meals', error);
-      }
-    };
+  const fetchRandomMeals = async () => {
+    try {
+      setError('');
+      setLoading(true);
+      const requests = Array.from({ length: 6 }, () =>
+        fetch(`${API_BASE_URL}/random.php`).then(res => res.json())
+      );
+      const results = await Promise.all(requests);
+      // Flatten and filter out any nulls
+      const randomMeals = results
+        .map(r => r.meals && r.meals[0])
+        .filter(Boolean);
+      setMeals(randomMeals);
+    } catch (error) {
+      setError('Error fetching random meals');
+      console.error('Error fetching random meals', error);
+    }
+  };
 
   useEffect(() => {
     fetchRandomMeals();
@@ -39,10 +41,17 @@ function App() {
   // Handle search query from SearchForm
   const handleSearch = (query) => {
 
+
+    if (!query) {
+      setHeading('Explore Meals')
+      fetchRandomMeals();
+      return
+    }
+
     try {
       setError('');
     //fetch date from API
-    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`
+    const url = `${API_BASE_URL}/search.php?s=${query}`
     fetch(url)
      .then(response => response.json())
       .then(data => {
