@@ -1,9 +1,14 @@
 import { useEffect, useState, useRef } from 'react'
 
-export default function SearchForm({search, setSearch, onSearch}) {
+export default function SearchForm({search, setSearch, handleSearch}) {
 
     
     const inputRef = useRef(null);
+
+    const onSearch = (e) => {
+        e.preventDefault();
+        handleSearch(search);
+    }
 
 
     useEffect(() => {
@@ -13,7 +18,7 @@ export default function SearchForm({search, setSearch, onSearch}) {
     }, []);
 
   return (
-    <form className="flex items-center space-x-2">
+    <form onSubmit={onSearch} className="flex items-center space-x-2">
       <input
         type="text"
         name="search"
