@@ -1,21 +1,26 @@
-import React from 'react'
+import { useEffect, useState, useRef } from 'react'
 
-export default function SearchForm({ onSubmit }) {
-  return (
-    <form
-      className="flex items-center space-x-2"
-      onSubmit={e => {
-        e.preventDefault()
-        if (onSubmit) {
-          const value = e.target.elements.search.value
-          onSubmit(value)
+export default function SearchForm({search, setSearch, onSearch}) {
+
+    
+    const inputRef = useRef(null);
+
+
+    useEffect(() => {
+        if(inputRef.current){
+            inputRef.current.focus();
         }
-      }}
-    >
+    }, []);
+
+  return (
+    <form className="flex items-center space-x-2">
       <input
         type="text"
         name="search"
+        value={search}
+        ref={inputRef}
         placeholder="Search meals..."
+        onInput={(e) => {setSearch(e.target.value)}}
         className="px-3 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
       />
       <button
