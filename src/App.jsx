@@ -1,6 +1,7 @@
 import './App.css'
-import Home from './views/Home'
+import {Route, Routes} from 'react-router-dom'
 import Ingradients from './views/Ingradients'
+import Home from './views/home'
 
 
 function App() {
