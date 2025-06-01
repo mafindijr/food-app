@@ -1,4 +1,5 @@
-import React from 'react'
+import { Link } from "react-router-dom";
+
 
 export default function Header() {
   return (
@@ -8,7 +9,8 @@ export default function Header() {
           meal search
         </span>
         <div className="flex items-center space-x-6">
-          {/* Placeholder for future nav items */}
+          <Link to="/" className="text-white p-2">Home</Link>
+          <Link to="/ingredients" className="text-white p-2">Ingredients</Link>
         </div>
       </div>
     </nav>
