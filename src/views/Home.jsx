@@ -10,7 +10,7 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export default function Home() {
 
-    const [search, setSearch] = useState('');
+  const [search, setSearch] = useState('');
   const [meals, setMeals] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
