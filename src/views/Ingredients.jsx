@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import MainLayout from '../layout/foodlayout';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -27,7 +28,8 @@ export default function Ingradients() {
   if (error) return <div className="text-center text-red-500 py-8">{error}</div>;
 
   return (
-    <div className="p-4">
+    <MainLayout>
+      <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">Ingredients</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {ingredients.map((ingredient, idx) => (
@@ -47,5 +49,6 @@ export default function Ingradients() {
         ))}
       </div>
     </div>
+    </MainLayout>
   );
 }
