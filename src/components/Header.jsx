@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 
 export default function Header() {
@@ -9,8 +9,8 @@ export default function Header() {
           meal search
         </span>
         <div className="flex items-center space-x-6">
-          <Link to="/" className="text-white p-2">Home</Link>
-          <Link to="/ingredients" className="text-white p-2">Ingredients</Link>
+          <NavLink to="/" className={({ isActive }) => isActive ? 'text-indigo-600 p-2' : 'text-white p-2' }>Home</NavLink>
+          <NavLink to="/ingredients" className={({ isActive }) => isActive ? 'text-indigo-600 p-2' : 'text-white p-2'}>Ingredients</NavLink>
         </div>
       </div>
     </nav>
