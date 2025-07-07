@@ -24,13 +24,12 @@ export default function Ingradients() {
       });
   }, []);
 
-  if (loading) return <div className="text-center py-8">Loading...</div>;
-  if (error) return <div className="text-center text-red-500 py-8">{error}</div>;
-
   return (
     <MainLayout>
       <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">Ingredients</h2>
+      { loading && <div className="text-center py-8">Loading...</div>}
+      {  error && <div className="text-center text-red-500 py-8">{error}</div>}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {ingredients.map((ingredient, idx) => (
           <div
