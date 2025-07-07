@@ -1,4 +1,4 @@
-import Card from '../components/card';
+import MealCard from '../components/MealCard';
 import MainLayout from '../layout/foodlayout';
 import SearchForm from '../components/SearchForm';
 import LoadingIndicator from '../components/LoadingIndicator';
@@ -94,7 +94,7 @@ export default function Home() {
              {!loading && meals.length === 0 && !error && <p className='text-center text-gray-200 text-2xl py-8'>No meals found</p>}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
              {!loading && meals.map((meal) => (
-              <Card key={meal.idMeal} meal={meal} />
+              <MealCard key={meal.idMeal} meal={meal} />
              ))}
           </div>
       </div>
